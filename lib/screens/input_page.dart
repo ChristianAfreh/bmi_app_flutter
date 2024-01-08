@@ -1,3 +1,6 @@
+import 'package:bmi_app/calculator_brain.dart';
+import 'package:bmi_app/screens/results_page.dart';
+
 import '../components/icon_content.dart';
 import '../components/reusable_card.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +25,7 @@ class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
   int height = 180;
   int weight = 60;
-  int age = 0;
+  int age = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -214,8 +217,20 @@ class _InputPageState extends State<InputPage> {
           BottomButton(
             buttonTitle: 'CALCULATE',
             onTap: () {
-              Navigator.pushNamed(context, '/results'); //named routing
-              //or Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsPage()));
+              CalculatorBrain calc =
+                  CalculatorBrain(height: height, weight: weight);
+
+              //Navigator.pushNamed(context, '/results'); //named routing
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultsPage(
+                    bMIResultValue: calc.calculateBMI(),
+                    bMIResultTitle: calc.getResult(),
+                    bMIResultInterpretation: calc.getInterpretation(),
+                  ),
+                ),
+              );
             },
           ),
         ],

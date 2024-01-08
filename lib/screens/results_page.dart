@@ -4,7 +4,16 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 class ResultsPage extends StatelessWidget {
-  const ResultsPage({super.key});
+  const ResultsPage({
+    super.key,
+    required this.bMIResultValue,
+    required this.bMIResultTitle,
+    required this.bMIResultInterpretation,
+  });
+
+  final String bMIResultValue;
+  final String bMIResultTitle;
+  final String bMIResultInterpretation;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +37,7 @@ class ResultsPage extends StatelessWidget {
               ),
             ),
           ),
-          const Expanded(
+          Expanded(
             flex: 5,
             child: ReusableCard(
               colour: kActiveCardColour,
@@ -37,15 +46,15 @@ class ResultsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Normal',
+                    bMIResultTitle.toUpperCase(),
                     style: kResultTextStyle,
                   ),
                   Text(
-                    '18.3',
+                    bMIResultValue,
                     style: kBMITextStyle,
                   ),
                   Text(
-                    'Your BMI result is quite low, you should eat more!',
+                    bMIResultInterpretation,
                     textAlign: TextAlign.center,
                     style: kBodyTextStyle,
                   ),
